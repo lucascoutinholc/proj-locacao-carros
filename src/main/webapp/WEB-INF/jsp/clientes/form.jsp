@@ -1,9 +1,3 @@
-<%-- 
-    Document   : form
-    Created on : 11/08/2020, 16:21:25
-    Author     : Lucas Coutinho
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

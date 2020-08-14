@@ -1,9 +1,3 @@
-<%-- 
-    Document   : lista
-    Created on : 11/08/2020, 16:15:48
-    Author     : Lucas Coutinho
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
