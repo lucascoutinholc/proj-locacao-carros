@@ -8,7 +8,7 @@ public class JpaUtil {
     private static EntityManagerFactory factory;
 
     static {
-        factory = Persistence.createEntityManagerFactory("loc-carros-pu");
+        factory = Persistence.createEntityManagerFactory("site-locacao-pu");
     }
 
     public static EntityManager getEntityManager() {

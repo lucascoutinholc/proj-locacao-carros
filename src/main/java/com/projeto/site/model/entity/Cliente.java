@@ -1,31 +1,29 @@
 package com.projeto.site.model.entity;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_cliente")
 public class Cliente implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cliente;
-    
-    @Column(length = 30, nullable = false)
     private String nome;
-    
-    @Column(length = 18, nullable = false)
     private String telefone;
+    private List<Locacao> locacoes = new ArrayList();
 
     public Cliente() {
     }
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId_cliente() {
         return id_cliente;
     }
@@ -34,6 +32,7 @@ public class Cliente implements Serializable {
         this.id_cliente = id_cliente;
     }
 
+    @Column(length = 30, nullable = false)
     public String getNome() {
         return nome;
     }
@@ -41,7 +40,8 @@ public class Cliente implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
+    @Column(length = 18, nullable = false)
     public String getTelefone() {
         return telefone;
     }
@@ -50,33 +50,17 @@ public class Cliente implements Serializable {
         this.telefone = telefone;
     }
 
+    @OneToMany(mappedBy = "cliente")
+    public List<Locacao> getLocacoes() {
+        return locacoes;
+    }
+
+    public void setLocacoes(List<Locacao> locacoes) {
+        this.locacoes = locacoes;
+    }
+
     @Override
     public String toString() {
-        return "Cliente{" + "id_cliente=" + id_cliente + ", nome=" + nome + ", telefone=" + telefone + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id_cliente);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.id_cliente, other.id_cliente)) {
-            return false;
-        }
-        return true;
+        return "Cliente{" + "id_cliente=" + id_cliente + ", nome=" + nome + ", telefone=" + telefone + ", locacoes=" + locacoes + '}';
     }
 }
