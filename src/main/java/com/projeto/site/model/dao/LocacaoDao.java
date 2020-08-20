@@ -1,13 +1,17 @@
 package com.projeto.site.model.dao;
 
 import com.projeto.site.model.entity.Locacao;
-import com.projeto.site.util.JpaUtil;
 import java.util.List;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Dependent
 public class LocacaoDao {
-    EntityManager manager = JpaUtil.getEntityManager();
+    
+    @Inject
+    EntityManager manager;
     
     public void salvar(Locacao locacao) {
         manager.getTransaction().begin();
@@ -19,9 +23,10 @@ public class LocacaoDao {
         return manager.find(Locacao.class, id);
     }
     
-    public List listarLocacoes() {
-        Query query = manager.createQuery("from Locacao");
-        return query.getResultList();
+    public List<Locacao> listarLocacoes() {
+        Query query = manager.createQuery("select l from Locacao l", Locacao.class);
+        List<Locacao> listaDeLocacoes = query.getResultList();
+        return listaDeLocacoes;
     }
     
     public void atualizar(Locacao locacao) {

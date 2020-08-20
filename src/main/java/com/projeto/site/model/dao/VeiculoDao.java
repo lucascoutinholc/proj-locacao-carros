@@ -1,14 +1,17 @@
 package com.projeto.site.model.dao;
 
 import com.projeto.site.model.entity.Veiculo;
-import com.projeto.site.util.JpaUtil;
 import java.util.List;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Dependent
 public class VeiculoDao {
     
-    EntityManager manager = JpaUtil.getEntityManager();
+    @Inject
+    EntityManager manager;
     
     public void salvar(Veiculo veiculo) {
         manager.getTransaction().begin();
@@ -21,7 +24,8 @@ public class VeiculoDao {
     }
     
     public List<Veiculo> listarVeiculos() {
-        Query query = manager.createQuery("from Veiculo");
+        Query query = manager.createQuery("select v from Veiculo v");
+        //List<Veiculo> listaDeVeiculos = query.getResultList();
         return query.getResultList();
     }
     

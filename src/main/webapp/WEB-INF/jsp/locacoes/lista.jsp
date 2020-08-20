@@ -35,5 +35,7 @@
                 </c:forEach>
             </tbody>
         </table>
+        
+        <a href="${linkTo[ClientesController].form}"> Ir para o formulário de Cliente </a>
     </body>
 </html>

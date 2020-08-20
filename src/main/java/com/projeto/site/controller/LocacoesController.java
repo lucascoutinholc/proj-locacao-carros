@@ -9,17 +9,24 @@ import com.projeto.site.model.entity.Cliente;
 import com.projeto.site.model.entity.Locacao;
 import com.projeto.site.model.entity.Veiculo;
 import java.util.List;
+import javax.inject.Inject;
 
 @Controller
 public class LocacoesController {
     
-    LocacaoDao lDao = new LocacaoDao();
+    @Inject
+    private LocacaoDao lDao;
     
-    ClienteDao cDao = new ClienteDao();
+    @Inject
+    private ClienteDao cDao;
     
-    VeiculoDao vDao = new VeiculoDao();
+    @Inject
+    private VeiculoDao vDao;
     
-    public void form(Result result) {
+    @Inject
+    private Result result;
+    
+    public void form() {
         List<Cliente> listaDeClientes = cDao.listarClientes();
         List<Veiculo> listaDeVeiculos = vDao.listarVeiculos();
         
@@ -27,11 +34,7 @@ public class LocacoesController {
         result.include("listaVeiculos", listaDeVeiculos);
     }
     
-    //Adicionar: salvar, editar e excluir
-    
-    public void salvar(Locacao locacao, Result result) {
-        System.out.println(locacao.toString());
-        
+    public void salvar(Locacao locacao) {        
         if (locacao.getId_locacao() == null) {
             lDao.salvar(locacao);
         } else {
@@ -41,21 +44,20 @@ public class LocacoesController {
         result.redirectTo(this).lista();
     }
     
-    public void editar(Long id, Result result) {
+    public void editar(Long id) {
         Locacao encontrado = lDao.buscarLocacao(id);
         result.include(encontrado);
         
-        result.redirectTo(this).form(result);
+        result.redirectTo(this).form();
     }
     
-    public void excluir(Long id, Result result) {
+    public void excluir(Long id) {
         lDao.excluir(id);
         
         result.redirectTo(this).lista();
     }
     
     public List<Locacao> lista() {
-        System.out.println(lDao.listarLocacoes());
         return lDao.listarLocacoes();
     }
 }

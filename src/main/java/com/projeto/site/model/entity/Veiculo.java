@@ -21,7 +21,7 @@ public class Veiculo implements Serializable {
     private String marca;
     private String ano;
     
-    private Locacao locacao;
+    //private Locacao locacao;
 
     public Veiculo() {
     }
@@ -64,14 +64,15 @@ public class Veiculo implements Serializable {
     }
     
     
-    public Locacao getLocacao() {
-        return locacao;
-    }
-
-    public void setLocacao(Locacao locacao) {
-        this.locacao = locacao;
-    }
+//    public Locacao getLocacao() {
+//        return locacao;
+//    }
+//
+//    public void setLocacao(Locacao locacao) {
+//        this.locacao = locacao;
+//    }
     
+    @Column(length = 15)
     public String getTipo() {
         return tipo;
     }
@@ -80,6 +81,7 @@ public class Veiculo implements Serializable {
         this.tipo = tipo;
     }
 
+    @Column(length = 25)
     public String getMarca() {
         return marca;
     }
@@ -88,6 +90,7 @@ public class Veiculo implements Serializable {
         this.marca = marca;
     }
 
+    @Column(length = 4)
     public String getAno() {
         return ano;
     }

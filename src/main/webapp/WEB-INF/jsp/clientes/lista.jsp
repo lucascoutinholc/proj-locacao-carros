@@ -29,5 +29,7 @@
                 </c:forEach>
             </tbody>
         </table>
+        
+        <a href="${linkTo[VeiculosController].form}"> Ir para o formulário de Veículo </a>
     </body>
 </html>

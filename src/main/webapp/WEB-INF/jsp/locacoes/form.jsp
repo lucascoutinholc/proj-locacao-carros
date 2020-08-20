@@ -1,12 +1,19 @@
+<%-- 
+    Document   : form
+    Created on : 20/08/2020, 10:42:13
+    Author     : lucascoutinho
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Formulário de Locações </title>
+        <title>JSP Page</title>
     </head>
     <body>
+        <h1>Hello World!</h1>
         <form action="${linkTo[LocacoesController].salvar}" method="get">
             <input type="number" name="locacao.id_locacao" hidden value="${locacao.id_locacao}">
 

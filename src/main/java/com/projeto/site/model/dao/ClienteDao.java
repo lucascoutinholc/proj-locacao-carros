@@ -1,14 +1,17 @@
 package com.projeto.site.model.dao;
 
 import com.projeto.site.model.entity.Cliente;
-import com.projeto.site.util.JpaUtil;
 import java.util.List;
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+@Dependent
 public class ClienteDao {
 
-    EntityManager manager = JpaUtil.getEntityManager();
+    @Inject
+    EntityManager manager;
 
     public void salvar(Cliente cliente) {
         manager.getTransaction().begin();
@@ -21,8 +24,9 @@ public class ClienteDao {
     }
 
     public List<Cliente> listarClientes() {
-        Query query = manager.createQuery("from Cliente");
-        return query.getResultList();
+        Query query = manager.createQuery("select c from Cliente c", Cliente.class);
+        List<Cliente> listaDeClientes = query.getResultList(); 
+        return listaDeClientes;
     }
 
     public void atualizar(Cliente cliente) {

@@ -5,15 +5,21 @@ import br.com.caelum.vraptor.Result;
 import com.projeto.site.model.dao.VeiculoDao;
 import com.projeto.site.model.entity.Veiculo;
 import java.util.List;
+import javax.inject.Inject;
 
 @Controller
 public class VeiculosController {
-    private VeiculoDao vDao = new VeiculoDao();
+    
+    @Inject
+    private VeiculoDao vDao;
+    
+    @Inject
+    private Result result;
     
     public void form() {
     }
     
-    public void salvar(Veiculo veiculo, Result result) {
+    public void salvar(Veiculo veiculo) {
         if (veiculo.getId_veiculo() == null) {
             vDao.salvar(veiculo);
         } else {
@@ -23,7 +29,7 @@ public class VeiculosController {
         result.redirectTo(this).lista();
     }
     
-    public void editar(Long id, Result result) {
+    public void editar(Long id) {
         Veiculo encontrado = vDao.buscarVeiculo(id);
         result.include(encontrado);
         
@@ -31,7 +37,7 @@ public class VeiculosController {
         
     }
     
-    public void excluir(Long id, Result result) {
+    public void excluir(Long id) {
         vDao.excluir(id);
         
         result.redirectTo(this).lista();
