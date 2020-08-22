@@ -16,6 +16,7 @@ public class LocacaoDao {
     public void salvar(Locacao locacao) {
         manager.getTransaction().begin();
         manager.persist(locacao);
+        manager.flush();
         manager.getTransaction().commit();
     }
     
@@ -24,9 +25,8 @@ public class LocacaoDao {
     }
     
     public List<Locacao> listarLocacoes() {
-        Query query = manager.createQuery("select l from Locacao l", Locacao.class);
-        List<Locacao> listaDeLocacoes = query.getResultList();
-        return listaDeLocacoes;
+        Query query = manager.createQuery("select l from Locacao l");
+        return query.getResultList();
     }
     
     public void atualizar(Locacao locacao) {

@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_locacao")
@@ -20,7 +21,7 @@ public class Locacao implements Serializable {
     private Long id_locacao;
     private Date dataInicio;
     private Date dataFim;
-    private int qtdDiarias;
+    private Long qtdDiarias;
     private Veiculo veiculo;
     private Cliente cliente;
 
@@ -39,6 +40,7 @@ public class Locacao implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
+    @NotNull(message = "{obrigatorio}")
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -49,6 +51,7 @@ public class Locacao implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
+    @NotNull(message = "{obrigatorio}")
     public Date getDataFim() {
         return dataFim;
     }
@@ -58,16 +61,17 @@ public class Locacao implements Serializable {
     }
 
     @Column(nullable = false)
-    public int getQtdDiarias() {
+    public Long getQtdDiarias() {
         return qtdDiarias;
     }
 
-    public void setQtdDiarias(int qtdDiarias) {
+    public void setQtdDiarias(Long qtdDiarias) {
         this.qtdDiarias = qtdDiarias;
     }
 
     @OneToOne
     @JoinColumn(name = "id_veiculo")
+    @NotNull(message = "{obrigatorio}")
     public Veiculo getVeiculo() {
         return veiculo;
     }
@@ -78,6 +82,7 @@ public class Locacao implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
+    @NotNull(message = "{obrigatorio}")
     public Cliente getCliente() {
         return cliente;
     }
@@ -85,9 +90,4 @@ public class Locacao implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-//    @Override
-//    public String toString() {
-//        return "Locacao{" + "id_locacao=" + id_locacao + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim + ", qtdDiarias=" + qtdDiarias + ", veiculo=" + veiculo + ", cliente=" + cliente + '}';
-//    }
 }

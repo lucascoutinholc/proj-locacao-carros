@@ -2,6 +2,7 @@ package com.projeto.site.controller;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.validator.Validator;
 import com.projeto.site.model.dao.ClienteDao;
 import com.projeto.site.model.dao.LocacaoDao;
 import com.projeto.site.model.dao.VeiculoDao;
@@ -26,6 +27,9 @@ public class LocacoesController {
     @Inject
     private Result result;
     
+    @Inject
+    private Validator validator;
+    
     public void form() {
         List<Cliente> listaDeClientes = cDao.listarClientes();
         List<Veiculo> listaDeVeiculos = vDao.listarVeiculos();
@@ -34,7 +38,13 @@ public class LocacoesController {
         result.include("listaVeiculos", listaDeVeiculos);
     }
     
-    public void salvar(Locacao locacao) {        
+    public void salvar(Locacao locacao) { 
+        validator.validate(locacao);
+        validator.onErrorRedirectTo(this).form();
+        
+        Long diasDeLocacao = (locacao.getDataFim().getTime() - locacao.getDataInicio().getTime())/(1000*60*60*24);  
+        locacao.setQtdDiarias(diasDeLocacao);
+        
         if (locacao.getId_locacao() == null) {
             lDao.salvar(locacao);
         } else {
@@ -58,6 +68,12 @@ public class LocacoesController {
     }
     
     public List<Locacao> lista() {
+        List<Cliente> listaDeClientes = cDao.listarClientes();
+        List<Veiculo> listaDeVeiculos = vDao.listarVeiculos();
+        
+        result.include("listaClientes", listaDeClientes);
+        result.include("listaVeiculos", listaDeVeiculos);
+        
         return lDao.listarLocacoes();
     }
 }

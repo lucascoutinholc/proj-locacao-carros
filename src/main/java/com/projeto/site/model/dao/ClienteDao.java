@@ -24,9 +24,8 @@ public class ClienteDao {
     }
 
     public List<Cliente> listarClientes() {
-        Query query = manager.createQuery("select c from Cliente c", Cliente.class);
-        List<Cliente> listaDeClientes = query.getResultList(); 
-        return listaDeClientes;
+        Query query = manager.createQuery("select c from Cliente c");
+        return query.getResultList();
     }
 
     public void atualizar(Cliente cliente) {

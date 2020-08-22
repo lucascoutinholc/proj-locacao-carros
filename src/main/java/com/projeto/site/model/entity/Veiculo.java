@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_veiculo")
@@ -16,12 +17,9 @@ public class Veiculo implements Serializable {
     private String placa;
     private String modelo;
     private BigDecimal valorDiaria;
-    
     private String tipo;
     private String marca;
     private String ano;
-    
-    //private Locacao locacao;
 
     public Veiculo() {
     }
@@ -37,6 +35,7 @@ public class Veiculo implements Serializable {
     }
 
     @Column(length = 10, nullable = false)
+    @NotNull(message = "{obrigatorio}")
     public String getPlaca() {
         return placa;
     }
@@ -46,6 +45,7 @@ public class Veiculo implements Serializable {
     }
 
     @Column(length = 18, nullable = false)
+    @NotNull(message = "{obrigatorio}")
     public String getModelo() {
         return modelo;
     }
@@ -55,6 +55,7 @@ public class Veiculo implements Serializable {
     }
 
     @Column(precision = 10, scale = 2, nullable = true)
+    @NotNull(message = "{obrigatorio}")
     public BigDecimal getValorDiaria() {
         return valorDiaria;
     }
@@ -63,16 +64,8 @@ public class Veiculo implements Serializable {
         this.valorDiaria = valorDiaria;
     }
     
-    
-//    public Locacao getLocacao() {
-//        return locacao;
-//    }
-//
-//    public void setLocacao(Locacao locacao) {
-//        this.locacao = locacao;
-//    }
-    
     @Column(length = 15)
+    @NotNull(message = "{obrigatorio}")
     public String getTipo() {
         return tipo;
     }
@@ -82,6 +75,7 @@ public class Veiculo implements Serializable {
     }
 
     @Column(length = 25)
+    @NotNull(message = "{obrigatorio}")
     public String getMarca() {
         return marca;
     }
@@ -91,6 +85,7 @@ public class Veiculo implements Serializable {
     }
 
     @Column(length = 4)
+    @NotNull(message = "{obrigatorio}")
     public String getAno() {
         return ano;
     }
@@ -98,9 +93,4 @@ public class Veiculo implements Serializable {
     public void setAno(String ano) {
         this.ano = ano;
     }
-    
-    @Override
-    public String toString() {
-        return "Veiculo{" + "id_veiculo=" + id_veiculo + ", placa=" + placa + ", modelo=" + modelo + ", valorDiaria=" + valorDiaria + '}';
-    }    
 }

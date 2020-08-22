@@ -2,6 +2,7 @@ package com.projeto.site.controller;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.validator.Validator;
 import com.projeto.site.model.dao.ClienteDao;
 import com.projeto.site.model.entity.Cliente;
 import java.util.List;
@@ -16,10 +17,16 @@ public class ClientesController {
     @Inject
     private Result result;
     
+    @Inject
+    private Validator validator;
+    
     public void form() {
     }
     
-    public void salvar(Cliente cliente) {        
+    public void salvar(Cliente cliente) {   
+        validator.validate(cliente);
+        validator.onErrorRedirectTo(this).form();
+        
         if (cliente.getId_cliente() == null) {
             cDao.salvar(cliente);
         } else {

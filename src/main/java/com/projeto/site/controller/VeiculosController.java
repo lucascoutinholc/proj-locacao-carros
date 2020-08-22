@@ -2,6 +2,7 @@ package com.projeto.site.controller;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.validator.Validator;
 import com.projeto.site.model.dao.VeiculoDao;
 import com.projeto.site.model.entity.Veiculo;
 import java.util.List;
@@ -16,10 +17,16 @@ public class VeiculosController {
     @Inject
     private Result result;
     
+    @Inject
+    private Validator validator;
+    
     public void form() {
     }
     
     public void salvar(Veiculo veiculo) {
+        validator.validate(veiculo);
+        validator.onErrorRedirectTo(this).form();
+        
         if (veiculo.getId_veiculo() == null) {
             vDao.salvar(veiculo);
         } else {

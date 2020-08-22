@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_cliente")
@@ -33,6 +34,7 @@ public class Cliente implements Serializable {
     }
 
     @Column(length = 30, nullable = false)
+    @NotNull(message = "{obrigatorio}")
     public String getNome() {
         return nome;
     }
@@ -41,6 +43,7 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
     
+    @NotNull(message = "{obrigatorio}")
     @Column(length = 18, nullable = false)
     public String getTelefone() {
         return telefone;
@@ -57,10 +60,5 @@ public class Cliente implements Serializable {
 
     public void setLocacoes(List<Locacao> locacoes) {
         this.locacoes = locacoes;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" + "id_cliente=" + id_cliente + ", nome=" + nome + ", telefone=" + telefone + ", locacoes=" + locacoes + '}';
     }
 }

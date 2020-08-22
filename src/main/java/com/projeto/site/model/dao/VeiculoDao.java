@@ -25,7 +25,6 @@ public class VeiculoDao {
     
     public List<Veiculo> listarVeiculos() {
         Query query = manager.createQuery("select v from Veiculo v");
-        //List<Veiculo> listaDeVeiculos = query.getResultList();
         return query.getResultList();
     }
     
