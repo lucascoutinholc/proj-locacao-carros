@@ -9,6 +9,9 @@ import com.projeto.site.model.dao.VeiculoDao;
 import com.projeto.site.model.entity.Cliente;
 import com.projeto.site.model.entity.Locacao;
 import com.projeto.site.model.entity.Veiculo;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -38,7 +41,7 @@ public class LocacoesController {
         result.include("listaVeiculos", listaDeVeiculos);
     }
     
-    public void salvar(Locacao locacao) { 
+    public void salvar(Locacao locacao) throws ParseException { 
         validator.validate(locacao);
         validator.onErrorRedirectTo(this).form();
         

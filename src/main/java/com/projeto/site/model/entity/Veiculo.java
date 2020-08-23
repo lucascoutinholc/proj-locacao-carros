@@ -13,19 +13,38 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_veiculo")
 public class Veiculo implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_veiculo;
+    
+    @Column(length = 10, nullable = false)
+    @NotNull(message = "{obrigatorio}")
     private String placa;
+    
+    @Column(length = 18, nullable = false)
+    @NotNull(message = "{obrigatorio}")
     private String modelo;
+    
+    @Column(precision = 10, scale = 2, nullable = true)
+    @NotNull(message = "{obrigatorio}")
     private BigDecimal valorDiaria;
+    
+    @Column(length = 15)
+    @NotNull(message = "{obrigatorio}")
     private String tipo;
+    
+    @Column(length = 25)
+    @NotNull(message = "{obrigatorio}")
     private String marca;
+    
+    @Column(length = 4)
+    @NotNull(message = "{obrigatorio}")
     private String ano;
 
     public Veiculo() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId_veiculo() {
         return id_veiculo;
     }
@@ -34,8 +53,6 @@ public class Veiculo implements Serializable {
         this.id_veiculo = id_veiculo;
     }
 
-    @Column(length = 10, nullable = false)
-    @NotNull(message = "{obrigatorio}")
     public String getPlaca() {
         return placa;
     }
@@ -44,8 +61,6 @@ public class Veiculo implements Serializable {
         this.placa = placa;
     }
 
-    @Column(length = 18, nullable = false)
-    @NotNull(message = "{obrigatorio}")
     public String getModelo() {
         return modelo;
     }
@@ -54,8 +69,6 @@ public class Veiculo implements Serializable {
         this.modelo = modelo;
     }
 
-    @Column(precision = 10, scale = 2, nullable = true)
-    @NotNull(message = "{obrigatorio}")
     public BigDecimal getValorDiaria() {
         return valorDiaria;
     }
@@ -64,8 +77,6 @@ public class Veiculo implements Serializable {
         this.valorDiaria = valorDiaria;
     }
     
-    @Column(length = 15)
-    @NotNull(message = "{obrigatorio}")
     public String getTipo() {
         return tipo;
     }
@@ -74,8 +85,6 @@ public class Veiculo implements Serializable {
         this.tipo = tipo;
     }
 
-    @Column(length = 25)
-    @NotNull(message = "{obrigatorio}")
     public String getMarca() {
         return marca;
     }
@@ -84,8 +93,6 @@ public class Veiculo implements Serializable {
         this.marca = marca;
     }
 
-    @Column(length = 4)
-    @NotNull(message = "{obrigatorio}")
     public String getAno() {
         return ano;
     }

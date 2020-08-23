@@ -1,6 +1,7 @@
 package com.projeto.site.model.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,18 +19,45 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_locacao")
 public class Locacao implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_locacao;
+
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    @NotNull(message = "{obrigatorio}")
     private Date dataInicio;
+
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    @NotNull(message = "{obrigatorio}")
     private Date dataFim;
+
+    @Column(nullable = false)
     private Long qtdDiarias;
+
+    @OneToOne
+    @JoinColumn(name = "id_veiculo")
+    @NotNull(message = "{obrigatorio}")
     private Veiculo veiculo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    @NotNull(message = "{obrigatorio}")
     private Cliente cliente;
 
     public Locacao() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public BigDecimal calcularTotal(Veiculo veiculo, Locacao locacao) {
+        BigDecimal diarias = BigDecimal.valueOf(locacao.getQtdDiarias());
+
+        BigDecimal total = veiculo.getValorDiaria().multiply(diarias);
+
+        return total;
+    }
+
     public Long getId_locacao() {
         return id_locacao;
     }
@@ -38,9 +66,6 @@ public class Locacao implements Serializable {
         this.id_locacao = id_locacao;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
-    @NotNull(message = "{obrigatorio}")
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -49,9 +74,6 @@ public class Locacao implements Serializable {
         this.dataInicio = dataInicio;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
-    @NotNull(message = "{obrigatorio}")
     public Date getDataFim() {
         return dataFim;
     }
@@ -60,7 +82,6 @@ public class Locacao implements Serializable {
         this.dataFim = dataFim;
     }
 
-    @Column(nullable = false)
     public Long getQtdDiarias() {
         return qtdDiarias;
     }
@@ -69,9 +90,6 @@ public class Locacao implements Serializable {
         this.qtdDiarias = qtdDiarias;
     }
 
-    @OneToOne
-    @JoinColumn(name = "id_veiculo")
-    @NotNull(message = "{obrigatorio}")
     public Veiculo getVeiculo() {
         return veiculo;
     }
@@ -80,9 +98,6 @@ public class Locacao implements Serializable {
         this.veiculo = veiculo;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    @NotNull(message = "{obrigatorio}")
     public Cliente getCliente() {
         return cliente;
     }

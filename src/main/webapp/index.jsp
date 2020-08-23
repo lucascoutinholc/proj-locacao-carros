@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 21/08/2020, 12:05:30
-    Author     : lucascoutinho
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">

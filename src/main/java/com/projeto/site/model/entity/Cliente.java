@@ -15,16 +15,25 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_cliente")
 public class Cliente implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cliente;
+
+    @Column(length = 30, nullable = false)
+    @NotNull(message = "{obrigatorio}")
     private String nome;
+
+    @Column(length = 18, nullable = false)
+    @NotNull(message = "{obrigatorio}")
     private String telefone;
+
+    @OneToMany(mappedBy = "cliente")
     private List<Locacao> locacoes = new ArrayList();
 
     public Cliente() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId_cliente() {
         return id_cliente;
     }
@@ -33,8 +42,6 @@ public class Cliente implements Serializable {
         this.id_cliente = id_cliente;
     }
 
-    @Column(length = 30, nullable = false)
-    @NotNull(message = "{obrigatorio}")
     public String getNome() {
         return nome;
     }
@@ -42,9 +49,7 @@ public class Cliente implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    @NotNull(message = "{obrigatorio}")
-    @Column(length = 18, nullable = false)
+
     public String getTelefone() {
         return telefone;
     }
@@ -53,7 +58,6 @@ public class Cliente implements Serializable {
         this.telefone = telefone;
     }
 
-    @OneToMany(mappedBy = "cliente")
     public List<Locacao> getLocacoes() {
         return locacoes;
     }
